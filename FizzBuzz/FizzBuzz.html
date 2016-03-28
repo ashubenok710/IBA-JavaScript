@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta name="generator" content="olat-tinymce-4" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title></head><body><p>Write a program that uses <code>console.log</code> to print all the numbers from 1 to 100, with two exceptions. For numbers divisible by 3, print <code>"Fizz"</code> instead of the number, and for numbers divisible by 5 (and not 3), print <code>"Buzz"</code> instead.</p>
+<p><a class="p_ident" id="p_fJ/4Bt0n0A" href="http://eloquentjavascript.net/02_program_structure.html#p_fJ/4Bt0n0A"></a>When you have that working, modify your program to print <code>"FizzBuzz"</code>, for numbers that are divisible by both 3 and 5 (and still print <code>"Fizz"</code> or <code>"Buzz"</code> for numbers divisible by only one of those).</p>
+<p><a class="p_ident" id="p_ixkJ0lwGKY" href="http://eloquentjavascript.net/02_program_structure.html#p_ixkJ0lwGKY"></a>(This is actually an interview question that has been claimed to weed out a significant percentage of programmer candidates. So if you solved it, you&rsquo;re now allowed to feel good about yourself.)</p>
+
+<script>
+	for (var i = 1; i <= 100; i++) {
+		if(i%3===0){
+			console.log("Fizz");
+		}else if(i%5===0 && i%3!=0){
+			console.log("Buzz")			
+		}else {
+			console.log(i)
+		}
+	}
+	console.log("-----------------------")
+
+	for (var i = 1; i <= 100; i++) {
+		if(i%3===0 && i%5===0){
+			console.log("FizzBuzz");
+		}else if(i%3===0 && i%5!=0){
+			console.log("Fizz");			
+		}else if(i%5===0 && i%3!=0){
+			console.log("Buzz");
+		}else {
+			console.log(i);
+		}
+	}
+
+</script>
+
+</body></html>
