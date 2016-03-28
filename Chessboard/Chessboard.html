@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta name="generator" content="olat-tinymce-4" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title></head><body><p>Write a program that creates a string that represents an 8&times;8 grid, using newline characters to separate lines. At each position of the grid there is either a space or a &ldquo;#&rdquo; character. The characters should form a chess board.</p>
+<p><a class="p_ident" id="p_9kgrie1A2f" href="http://eloquentjavascript.net/02_program_structure.html#p_9kgrie1A2f"></a>Passing this string to <code>console.log</code> should show something like this:</p>
+<pre> # # # #
+# # # #
+ # # # #
+# # # #
+ # # # #
+# # # #
+ # # # #
+# # # #</pre>
+<p><a class="p_ident" id="p_8n1E0bRGiW" href="http://eloquentjavascript.net/02_program_structure.html#p_8n1E0bRGiW"></a>When you have a program that generates this pattern, define a variable <code>size = 8</code> and change the program so that it works for any <code>size</code>, outputting a grid of the given width and height.</p>
+
+<script>
+	var Message = "Specify the chessboard size. It should be an integer value";
+	var size = Number(prompt(Message, ""));	
+	while(isNaN(size)){
+		size = Number(prompt(Message, ""));			
+	}  		
+	for (var i = 1; i <= size; i++) {
+		if(i%2!=0){
+			s = "";
+			for (var j = 1; j <= size; j++) {								
+				if(j%2!=0){
+					s += " ";
+				}else{
+					s += "#"
+				}				
+			}
+			console.log(s);
+		}else{
+			s = "";
+			for (var j = 1; j <= size; j++) {								
+				if(j%2!=0){
+					s += "#";
+				}else{
+					s += " "
+				}				
+			}
+			console.log(s);
+		}
+	}	
+
+</script>
+
+</body></html>
