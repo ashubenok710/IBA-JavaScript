@@ -10,12 +10,26 @@
   <script>
 
 function reverseArray(array) {
-	array.reverse();
-	return array;	
+	var rarray = [];
+	var j = array.length-1;
+	for (var i = 0; i <= array.length-1; i++) {
+		if (j >= 0) {
+			rarray[i] = array[j];
+			j--;
+		}
+	}
+	return rarray;	
 }
 
 function reverseArrayInPlace(array) {
- 	reverseArray(array);
+ 	var temp;
+	var m = Math.ceil(array.length / 2);
+	for (var i = 0; i < m; i++) {
+	 	temp = array[i];
+	 	array[i] = array[m-i+1];
+	 	array[m-i+1] = temp;
+	} 
+	return array;
 }
 
 console.log(reverseArray(["A", "B", "C"]));
