@@ -1,0 +1,9 @@
+git init
+
+git status
+
+git add triangle/.
+
+git commit -m "Test"
+
+git push
