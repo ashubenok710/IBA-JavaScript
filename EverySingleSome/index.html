@@ -10,31 +10,65 @@
   <script>
 
 function every(array, predicate) {
-	
-	for(var i = 0; i<array.length; i++){
-		console.log(isNaN(array[i]));
+	//console.log('isNan=',isNaN(predicate));
+	if(isNaN(predicate)){
+		for(var i = 0; i<array.length; i++){
+		//console.log(isNaN(array[i]));
 		if(!isNaN(array[i])){
 			break;			
 		}
+		}
+		if(i === array.length){return true;}
+		else return false;	
 	}
-	if(i === array.length){return true;}
-	else return false;
+	else{
+		var k = 0;
+		for(var i = 0; i<array.length; i++){
+			//console.log(isNaN(array[i]));
+			if(predicate === array[i]){
+				k++;		
+			}
+		}
+		if(k === array.length){return true;}
+		else return false;	
+	}
 }
 
 function some(array, predicate) {
-	for(var i = 0; i<array.length; i++){
-		console.log(isNaN(array[i]));
-		if(isNaN(array[i])){
-			return true;					
+	if(isNaN(predicate)){
+		for(var i = 0; i<array.length; i++){
+			//console.log(isNaN(array[i]));
+			if(isNaN(array[i])){
+				return true;					
+			}
+		return false;
 		}
-	}	
-	return false;
+	}
+	else{
+		var k = 0;
+		for(var i = 0; i<array.length; i++){
+			//console.log(isNaN(array[i]));
+			if(predicate === array[i]){
+				k++;		
+			}
+		}
+		console.log(k);
+		if(k > 0){return true;}
+		else return false;	
+	}
+	
 }
 
+console.log(every([5, 5, 5], 3)); // → false
+console.log(every([5, 5, 5], 5)); // → true
+console.log('____________________________________________');
 console.log(every([NaN, NaN, NaN], isNaN)); // → true
 console.log(every([NaN, NaN, 4], isNaN)); // → false
 console.log(some([NaN, 3, 4], isNaN)); // → true
 console.log(some([2, 3, 4], isNaN)); // → false
+console.log('____________________________________________');
+console.log(some([2, 3, 4], 1)); // → false
+console.log(some([2, 3, 4], 4)); // → true
 
   </script>
 
