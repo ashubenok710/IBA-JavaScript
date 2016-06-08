@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+</head>
+<body>
+
+  <script>
+
+	function ArraySeq(array){
+		this.curArray = array;
+		this.curValue = null;
+		this.curNum = 0;
+	}
+
+	ArraySeq.prototype.current = function(){
+		return this.curValue;
+	}
+
+	ArraySeq.prototype.next = function(){
+		if(this.curNum < this.curArray.length){
+			this.curValue = this.curArray[this.curNum++];
+			return true;
+		} else{
+			return false;
+		}
+	}
+
+	function RangeSeq(from, to){
+		this.from = from;
+		this.to = to;
+		this.curValue = null;
+		this.curNum = 0;
+	}
+
+	RangeSeq.prototype.current = function () {
+	  	return this.curValue;
+	};
+
+	RangeSeq.prototype.next = function () {
+	  	if (this.curNum < this.to) {
+	    	this.curValue = this.from++;
+			return true;
+	  	} else {
+	    	return false;
+	  	}
+	};
+
+	function logFive(seq){
+		for (var i = 0; i < 5; i++) {
+			if (seq.next()) {
+				console.log(seq.current());
+			} else{	
+				break;				
+			}
+		}
+	}
+
+logFive(new ArraySeq([1, 2, 3, 4, 5 ]));
+// → 1
+// → 2
+console.log('------------------------------');
+logFive(new RangeSeq(100, 1000));
+// → 100
+// → 101
+// → 102
+// → 103
+// → 104
+
+  </script>
+
+</body>
+</html>
