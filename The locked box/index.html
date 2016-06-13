@@ -28,7 +28,6 @@ function withBoxUnlocked(body) {
     return body();
   } 
   finally {
-    box.locked = true;
   }
 };
 
