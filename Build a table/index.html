@@ -1,0 +1,55 @@
+<!doctype html>
+<script src="mountains.js"></script>
+<script src="13_dom.js"></script>
+
+<style>
+  /* Defines a cleaner look for tables */
+  table  { border-collapse: collapse; }
+  td, th { border: 1px solid black; padding: 3px 8px; }
+  th     { text-align: left; }
+</style>
+
+<body>
+<script>
+  function buildTable(data) {
+    // your code
+	  var body = document.getElementsByTagName("body")[0];
+	  var tbl     = document.createElement("table");
+	  var tblBody = document.createElement("tbody");
+	 
+	  var row = document.createElement("tr");
+	  for (var j = 0; j < Object.keys(data[1]).length; j++) {
+		var cell = document.createElement("th");
+	    var cellText = document.createTextNode(Object.keys(data[1])[j]);
+		cell.appendChild(cellText);
+	    row.appendChild(cell);
+	    //console.log(Object.keys(data[1])[j]);
+	  } 
+	  tblBody.appendChild(row)
+
+	  for (var i = 0; i < data.length; i++) {
+	    var row = document.createElement("tr"); 
+	    for (var j = 0; j < Object.keys(data[1]).length; j++) {
+	 	  //console.log(data[i][Object.keys(data[i])[j]]);
+	      var cell = document.createElement("td");
+	      var cellText = document.createTextNode(data[i][Object.keys(data[i])[j]]);
+	      cell.appendChild(cellText);
+	      if(!isNaN(data[i][Object.keys(data[i])[j]])){	
+	      	cell.setAttribute('style', 'text-align: right;');
+	      }
+	      row.appendChild(cell);
+	    } 
+	    
+	    tblBody.appendChild(row);
+	  }
+	
+	  tbl.appendChild(tblBody);
+	
+	  body.appendChild(tbl);
+
+	  return tbl;
+  }
+	//console.log(MOUNTAINS[0].height);
+  	document.body.appendChild(buildTable(MOUNTAINS));
+</script>
+</body>
