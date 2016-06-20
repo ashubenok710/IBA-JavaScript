@@ -1,0 +1,13 @@
+<!doctype html>
+
+<input type="text">
+<script>
+  var field = document.querySelector("input");
+  // code
+  field.addEventListener("keypress", function (evt) {
+    if (evt.which === 81 || evt.which === 87 || evt.which === 88 ) {
+        evt.preventDefault();
+    }
+});
+
+</script>
