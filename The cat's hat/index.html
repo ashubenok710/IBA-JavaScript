@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="mountains.js"></script>
+  <script src="chapter/13_dom.js"></script>
+</head>
+<body>
+
+<body style="min-height: 200px">
+
+<img src="cat.png" id="cat" style="position: absolute">
+<img src="hat.png" id="hat" style="position: absolute">
+
+  <script>
+		var hat = document.getElementById("hat");
+		var cat = document.getElementById("cat");
+		cat.style.top = 55 + 'px';
+		cat.style.left = 100 + 'px';
+
+		hat.style.top = 85 + 'px';
+		hat.style.left = 110 + 'px';
+
+    var angle = 250;
+    var x = 0;
+    var y = 0;
+    var w = 100;
+    var h = 150;
+
+    function hatCircle() {
+        x = w + w * Math.cos(angle * Math.PI / 180);
+        y = h + h * Math.sin(angle * Math.PI / 180);
+        
+        hat.style.left = x + 'px';
+        hat.style.top = y + 'px';
+
+        angle++;
+        if (angle > 360) {
+            angle = 0;
+        }
+        setTimeout(hatCircle,20);
+    }
+	
+	hatCircle();
+
+  </script>
+
+</body>
+</html>
