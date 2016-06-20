@@ -15,10 +15,23 @@
   
   <script>
 
-  function byTagName(node, tagName) {
-   // your code   
-   //console.log((node || document));
-    return (node || document).querySelectorAll(tagName);   
+
+  function byTagName(node, tagName) {   
+    var elements = [];
+
+    function countelements(child){
+      for (var i = 0; i <= child.childNodes.length; i++) {
+        if(!(child.childNodes[i] === undefined)){      
+          if(child.childNodes[i].tagName === tagName.toUpperCase()){
+            elements.push(child.childNodes[i]);
+          } 
+          countelements(child.childNodes[i])
+        }  
+      }
+    }  
+    
+    countelements(node);    
+    return elements;
   }
 
   console.log(byTagName(document.body, "h1").length);
