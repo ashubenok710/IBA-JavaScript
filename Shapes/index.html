@@ -1,0 +1,142 @@
+<!doctype html>
+<script src="15_game.js"></script>
+<script src="game_levels.js"></script>
+<script src="16_canvas.js"></script>
+
+<canvas width="1000" height="600"></canvas>
+
+primitive drawing program.
+
+<style>
+  body {
+    height: 200px;
+    background: beige;
+  }
+  .dot {
+    height: 8px; width: 8px;
+    border-radius: 4px; /* rounds corners */
+    background: blue;
+    position: absolute;
+  }
+</style>
+
+
+<script>
+ addEventListener("click", function(event) {
+    var dot = document.createElement("div");
+    dot.className = "dot";
+    dot.style.left = (event.pageX - 4) + "px";
+    dot.style.top = (event.pageY - 4) + "px";
+    document.body.appendChild(dot);
+    console.log('x='+event.pageX+' y='+event.pageY);
+  });
+
+var canv =  document.querySelector("canvas");
+var contx = canv.getContext('2d');
+contx.clearRect(0, 0, canv.width, canv.height);
+
+function drawZigzaggingLine(ctx, x, y, num){
+    ctx.beginPath();
+	ctx.strokeStyle = "black";
+	ctx.lineWidth = 1;
+	ctx.moveTo(x, y);
+	for (var i = 0; i < num; i++) {
+		ctx.lineTo(x + num*10, y + i * num + num/2);
+		ctx.lineTo(x, y + i * num + num);
+	}
+
+	ctx.stroke();
+	ctx.closePath();
+	ctx.beginPath();
+}
+
+function drawTrapezoid(ctx, x, y, topedge, bottomedge, color){
+  ctx.beginPath();
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 2;
+  ctx.fillStyle = color;
+  ctx.moveTo(x-topedge/2, y-topedge/2);
+  ctx.lineTo(x+topedge/2, y-topedge/2);
+  ctx.lineTo(x+bottomedge/2, y+bottomedge/2);
+  ctx.lineTo(x-bottomedge/2, y+bottomedge/2);  
+  ctx.lineTo(x-topedge/2, y-topedge/2);
+  
+  ctx.stroke();
+  ctx.fill(); 
+  ctx.closePath();
+  ctx.beginPath();
+}
+
+function drawShape(ctx, x, y, points, radius1, radius2, alpha0, color) {
+    //points: number of points (or number of sides for polygons)
+    //radius1: "outer" radius of the star
+    //radius2: "inner" radius of the star (if equal to radius1, a polygon is drawn)
+    //angle0: initial angle (clockwise), by default, stars and polygons are 'pointing' up
+    var i, angle, radius;
+    if (radius2 !== radius1) {
+        points = 2 * points;
+    }
+    for (i = 0; i <= points; i++) {
+        angle = i * 2 * Math.PI / points - Math.PI / 2 + alpha0;
+        radius = i % 2 === 0 ? radius1 : radius2;
+        ctx.lineTo(x + radius * Math.cos(angle), y + radius * Math.sin(angle));
+    }
+    ctx.strokeStyle = "black";
+	ctx.fillStyle = color;
+	ctx.lineWidth = 2;
+	ctx.stroke();
+	ctx.fill();
+
+	ctx.closePath();
+	ctx.beginPath();
+}
+
+function drawSpirale(cxt, centerX, centerY){
+	cxt.moveTo(centerX, centerY);
+	var gap = 3; // increase this for spacing between spiral lines        
+	var STEPS_PER_ROTATION = 60; // increasing this makes the curve smoother
+
+	var increment = 1.5*Math.PI/STEPS_PER_ROTATION;		
+	var theta = increment;
+	while( theta < 7*Math.PI) {
+		var newX = centerX - theta * Math.cos(theta) * gap; 
+		var newY = centerY - theta * Math.sin(theta) * gap; 
+		cxt.lineTo(newX, newY);
+		theta = theta + increment;
+	}
+	cxt.stroke(); // draw the spiral
+
+}
+
+function drawStar(cx, centerX, centerY, R){
+  cx.beginPath();
+  cx.moveTo(centerX, centerY - R);
+  // control=(60,10) goal=(90,90)
+  cx.quadraticCurveTo(centerX+10 , centerY-10 , centerX+70, centerY-70);
+  cx.quadraticCurveTo(centerX+10 , centerY-10 , centerX+R, centerY);
+  cx.quadraticCurveTo(centerX+10 , centerY+10 , centerX+70, centerY+70);
+  cx.quadraticCurveTo(centerX+10 , centerY+10 , centerX, centerY+R);
+  cx.quadraticCurveTo(centerX-10 , centerY+10 , centerX-70, centerY+70);
+  cx.quadraticCurveTo(centerX-10 , centerY+10 , centerX-R, centerY);
+  cx.quadraticCurveTo(centerX+10 , centerY-10 , centerX-70, centerY-70);
+  cx.quadraticCurveTo(centerX+10 , centerY-10 , centerX, centerY-R);
+  
+  //cx.arc(centerX,centerY,R,0,2*Math.PI);
+  cx.fillStyle = "yellow";
+  cx.closePath();
+  cx.stroke();
+  cx.fill();
+}
+
+
+drawTrapezoid(contx, 60, 30, 50, 100, "white");//trapezoid
+drawShape(contx, 160, 40, 4, 40, 40, 0, "red"); // diamond
+drawZigzaggingLine(contx, 230, 10, 9);//zigzagging line
+drawSpirale(contx, 400, 70);
+
+drawStar(contx, 100, 200, 100);
+
+//drawShape(contx, 100, 300, 8, 80, 30, 0, "yellow"); //star
+
+</script>
+
