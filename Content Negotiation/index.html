@@ -1,0 +1,32 @@
+<!doctype html>
+
+<script>
+//console.log(req.responseXML.querySelectorAll("fruit").length);
+	var txt = new XMLHttpRequest(),
+		htm = new XMLHttpRequest(),
+		jsn = new XMLHttpRequest();
+	txt.open("GET", "http://eloquentjavascript.net/author", false);
+	txt.setRequestHeader('Accept', 'text/plain');
+	txt.send(null);
+	console.log(txt.responseText);
+
+	htm.open("GET", "http://eloquentjavascript.net/author", false);
+	htm.setRequestHeader('Accept', 'text/html');
+	htm.send(null);
+	console.log(htm.responseText);
+
+	jsn.open("GET", "http://eloquentjavascript.net/author", false);
+	jsn.setRequestHeader('Accept', 'application/json');
+	jsn.send(null);
+	console.log("name= "+JSON.parse(jsn.responseText).name);
+	console.log("email= "+JSON.parse(jsn.responseText).email);
+	console.log("website= "+JSON.parse(jsn.responseText).website);
+	console.log(JSON.parse(jsn.responseText));
+
+	var app = new XMLHttpRequest();
+	app.open("GET", "http://eloquentjavascript.net/author", false);
+	app.setRequestHeader('Accept', 'application/rainbows+unicorns');
+	app.send(null);
+
+	//text/plain, text/html, and application/json, application/rainbows+unicorns
+</script>
