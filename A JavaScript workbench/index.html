@@ -2,14 +2,31 @@
 <script src="promise.js"></script>
 
 <textarea id="code">return "hi";</textarea>
-<button id="button" onClick="run();">Run</button>
+<button id="button">Run</button>
 <pre id="output"></pre>
 
 <script>
 	// code
-	function run() {
-      var el = document.getElementById('code');
-	  window.eval(el.value);
-	} 
+	var el = document.getElementById('code');
+	var btn = document.getElementById('button');
 	
+	var myFunction = new Function("n", "return n");
+
+	function addClickHandler(elem, arg1) {
+    	elem.addEventListener('click', function(e) {    		
+        	return myFunction(arg1);
+    	}, false);
+	}
+
+	addClickHandler(btn,el.value);
+
+/*
+var multiply = new Function("x", "y", "return x * y");
+function addClickHandler(elem, arg1, arg2) {
+    elem.addEventListener('click', function(e) {
+        return console.log(multiply(arg1, arg2));
+    }, false);
+}
+addClickHandler(btn,6,7);
+*/
 </script>
