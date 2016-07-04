@@ -7,21 +7,17 @@
 
 <script>
 	// code
-	var el = document.getElementById('code');
-	var btn = document.getElementById('button');
 	
-	var myFunction = new Function("n", "console.log(n);return n");
-
-	function addClickHandler(elem, arg1) {
-    	elem.addEventListener('click', function(e) {    		
-        	return myFunction(arg1);
-    	}, false);
-	}
-	try{
-		addClickHandler(btn,el.value);	
-	} catch (err) {  
-		console.log(err);
-	}
+	document.querySelector("#button").addEventListener("click", function() {
+    var code = document.querySelector("#code").value;
+    var outputNode = document.querySelector("#output");
+    try {
+      var result = new Function(code)();
+      outputNode.innerText = String(result);
+    } catch (e) {
+      outputNode.innerText = "Error: " + e;
+    }
+  });
 	
 
 /*
