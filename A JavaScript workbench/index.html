@@ -10,19 +10,23 @@
 	var el = document.getElementById('code');
 	var btn = document.getElementById('button');
 	
-	var myFunction = new Function("n", "return n");
+	var myFunction = new Function("n", "console.log(n);return n");
 
 	function addClickHandler(elem, arg1) {
     	elem.addEventListener('click', function(e) {    		
         	return myFunction(arg1);
     	}, false);
 	}
-
-	addClickHandler(btn,el.value);
+	try{
+		addClickHandler(btn,el.value);	
+	} catch (err) {  
+		console.log(err);
+	}
+	
 
 /*
 var multiply = new Function("x", "y", "return x * y");
-function addClickHandler(elem, arg1, arg2) {
+function addClickHandler(elem, arg1, arg2) {  
     elem.addEventListener('click', function(e) {
         return console.log(multiply(arg1, arg2));
     }, false);
