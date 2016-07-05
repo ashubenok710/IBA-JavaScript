@@ -1,0 +1,76 @@
+<!doctype html>
+<script src="promise.js"></script>
+
+<input type="text" id="field">
+<div id="suggestions" style="cursor: pointer"></div>
+
+<style>
+#suggestions {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #000;
+  overflow: scroll;
+  display: none;
+}
+
+#field{
+	width: 200px;
+}
+</style>>
+
+<script>
+	// Builds up an array with global variable names, like
+	// 'alert', 'document', and 'scrollTo'
+	var terms = ['alert', 'document', 'scrollTo'];
+	for (var name in window)
+		terms.push(name);
+
+	// Your code here.
+	var field = document.getElementById("field");
+	var sgst = document.getElementById("suggestions");
+	field.addEventListener("focus", function () {displaySuggestions(terms);});
+	field.addEventListener("keyup", getString);
+	sgst.addEventListener("click", clickListener);
+	sgst.addEventListener("click", removeElement);
+
+	function removeElement(event){
+	    sgst.style.display = "none";
+	}
+
+
+	function getString(){
+		var filterdTerms = [];
+	  	for (var i = 0; i < terms.length; i++) {
+	  		var tmp = terms[i].toUpperCase();	  		
+	    	if (tmp.indexOf(field.value.toUpperCase()) === 0) {	    		
+	        	filterdTerms.push(terms[i]);
+	     	}
+	  	}
+	  	displaySuggestions(filterdTerms);
+	}
+
+	function clickListener(event) {
+		field.value = event.target.innerText;
+	  	removeElement();
+	}
+
+	function displaySuggestions(filterdTerms) {
+	  	sgst.style.display = "block";
+	  	sgst.innerHTML = "";
+	  
+	  	if(field.value ===""){
+	    	removeElement();
+	  	}
+	  	else {
+	    	for (var i = 0; i < filterdTerms.length; i++) {
+		      	var current = filterdTerms[i];
+		      	var p = document.createElement("p");
+		      	var term = document.createTextNode(current);		      
+		      	sgst.appendChild(p);
+		      	p.style.borderBottom = "1px solid #000";		      	
+		      	p.appendChild(term);
+	    	}
+	  	}
+	}
+
+</script>
