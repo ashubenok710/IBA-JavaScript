@@ -22,8 +22,9 @@
 	// Builds up an array with global variable names, like
 	// 'alert', 'document', and 'scrollTo'
 	var terms = ['alert', 'document', 'scrollTo'];
-	for (var name in window)
+	for (var name in window)	
 		terms.push(name);
+	console.log(terms);
 
 	// Your code here.
 	var field = document.getElementById("field");
@@ -37,7 +38,6 @@
 	    sgst.style.display = "none";
 	}
 
-
 	function getString(){
 		var filterdTerms = [];
 	  	for (var i = 0; i < terms.length; i++) {
@@ -46,6 +46,10 @@
 	        	filterdTerms.push(terms[i]);
 	     	}
 	  	}
+	  	filterdTerms = filterdTerms.filter(function(item, pos) {
+    		return filterdTerms.indexOf(item) == pos;
+		})
+	  	console.log(filterdTerms);
 	  	displaySuggestions(filterdTerms);
 	}
 
